@@ -20,5 +20,50 @@
           p:brand="Nissan X-Trail"
           p:color="Red"
           p:maxSpeed="220"/>
+    <!--Constructor args with different type
+        no need declare args index and type
+        java reflection will find the correct args
+    -->
+    <bean id="MyWorker" class="com.smart.Worker">
+        <constructor-arg>
+            <value>26</value>
+        </constructor-arg>
+        <constructor-arg>
+            <ref bean="MyCar"/>
+        </constructor-arg>
+        <constructor-arg>
+            <ref bean="MyOffice"/>
+        </constructor-arg>
+    </bean>
 
+    <!--Constructor args with same type, need index-->
+    <bean id="MyOffice" class="com.smart.Office">
+        <constructor-arg index="0" value="6 Simei Rise"/>
+        <constructor-arg index="1" value="Maos Company"/>
+    </bean>
+
+    <!--circular reference-->
+    <!--
+    <bean id="MyA" class="com.smart.ClassA">
+        <constructor-arg>
+            <ref bean="MyB"/>
+        </constructor-arg>
+    </bean>
+
+    <bean id="MyB" class="com.smart.ClassB">
+        <constructor-arg>
+            <ref bean="MyA"/>
+        </constructor-arg>
+    </bean>
+    -->
+
+    <!--static factory injection-->
+    <!--if not static factory, need define factory bean
+    then declare factory-bean -> factory bean id
+    -->
+    <bean id="NewCar" class="com.smart.factory.CarFactory"
+          factory-method="createCar">
+        <constructor-arg index="0" value="BMW"/>
+        <constructor-arg index="1" value="white"/>
+    </bean>
 </beans>

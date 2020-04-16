@@ -27,6 +27,13 @@ public class Car implements BeanFactoryAware, BeanNameAware, InitializingBean, D
         System.out.println("Car -> Constructor");
     }
 
+    public Car(String brand,String color,int maxSpeed){
+        this.brand = brand;
+        this.color = color;
+        this.maxSpeed = maxSpeed;
+    }
+
+
     //BeanFactoryAware
     public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
         System.out.println("BeanFactoryAware - setBeanFactory:" + beanFactory);
