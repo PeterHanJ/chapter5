@@ -14,6 +14,7 @@
             http://www.springframework.org/schema/aop
             http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
 
+    <import resource="classpath:context1.xml"/>
     <bean id="MyCar" class="com.smart.Car"
           init-method="myInit"
           destroy-method="myDestroy"
@@ -57,13 +58,6 @@
     </bean>
     -->
 
-    <!--static factory injection-->
-    <!--if not static factory, need define factory bean
-    then declare factory-bean -> factory bean id
-    -->
-    <bean id="NewCar" class="com.smart.factory.CarFactory"
-          factory-method="createCar">
-        <constructor-arg index="0" value="BMW"/>
-        <constructor-arg index="1" value="white"/>
-    </bean>
+
+
 </beans>

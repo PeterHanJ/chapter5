@@ -109,4 +109,8 @@ public class Car implements BeanFactoryAware, BeanNameAware, InitializingBean, D
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         System.out.println("ApplicationContextAware - setApplicationContext");
     }
+
+    public void printCar(String in){
+        System.out.println("Hello : " + in);
+    }
 }

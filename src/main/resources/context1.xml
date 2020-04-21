@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context-4.0.xsd
+            http://www.springframework.org/schema/tx
+            http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+            http://www.springframework.org/schema/aop
+            http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
+
+
+    <!--static factory injection-->
+    <!--if not static factory, need define factory bean
+    then declare factory-bean -> factory bean id
+    -->
+    <bean id="NewCar" class="com.smart.factory.CarFactory"
+          factory-method="createCar">
+        <constructor-arg index="0" value="BMW"/>
+        <constructor-arg index="1" value="white"/>
+    </bean>
+
+    <!--Use Car2 replace the Car1 printCar method-->
+    <!--ReplaceCar need implement MethodReplacer interface-->
+    <bean id="Car1" class="com.smart.Car">
+        <replaced-method name="printCar" replacer="Car2"/>
+    </bean>
+
+    <bean id="Car2" class="com.smart.ReplaceCar"/>
+
+    <bean id="abstractCar" class="com.smart.Car"
+          p:brand="BMW"
+          p:color="white"
+          abstract="true"
+    />
+    <bean id="car3" parent="abstractCar" p:maxSpeed="180"/>
+    <bean id="car4" parent="abstractCar" p:maxSpeed="160"/>
+
+    <bean id="worker1" class="com.smart.Worker">
+        <property name="carId">
+            <idref bean="car3"/>
+        </property>
+    </bean>
+
+    <!--Car BeanFactory-->
+    <bean id="beanCar" class="com.smart.factory.CarFactoryBean"
+          p:carInfo="Benz,Red,230"/>
+
+</beans>

@@ -4,7 +4,11 @@ public class Worker {
     private Car ownCar;
     private int age;
     private Office office;
+    private String carId;
 
+    public Worker(){
+
+    }
     public Worker(Car ownCar,int age,Office office){
         this.ownCar = ownCar;
         this.age = age;
@@ -33,5 +37,13 @@ public class Worker {
 
     public void setOffice(Office office) {
         this.office = office;
+    }
+
+    public String getCarId() {
+        return carId;
+    }
+
+    public void setCarId(String carId) {
+        this.carId = carId;
     }
 }
